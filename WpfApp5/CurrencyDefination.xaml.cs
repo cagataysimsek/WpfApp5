@@ -103,7 +103,7 @@ namespace WpfApp5
             }
             else
             {
-                MessageBox.Show(comboCurrency.Text + " Adında Bir Para Birimi Bulunmamakta!");
+                //MessageBox.Show(comboCurrency.Text + " Adında Bir Para Birimi Bulunmamakta!");
             }   
         }
     }
