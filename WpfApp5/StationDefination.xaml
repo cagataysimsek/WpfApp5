@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfApp5.StationDefination"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="StationDefination" Height="650" Width="800">
+    <Grid Loaded="Grid_Loaded">
+        <ComboBox x:Name="comboStationName" HorizontalAlignment="Left" Margin="264,99,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" local:ComboBoxBehavior.CharacterCasing="Upper"/>
+        <ComboBox x:Name="comboDealerName" HorizontalAlignment="Left" Margin="264,67,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" local:ComboBoxBehavior.CharacterCasing="Upper" IsReadOnly="True" SelectionChanged="comboDealerName_SelectionChanged"/>
+        <ComboBox x:Name="comboBussinessType" HorizontalAlignment="Left" Margin="265,34,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" local:ComboBoxBehavior.CharacterCasing="Upper" IsReadOnly="True"/>
+        <Label Content="İstasyon Adı Giriniz:" Height="30"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,97,0,0"/>
+        <Label Content="Dağıtıcı Adı Seçiniz:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,66,0,0"/>
+        <Label Content="Bussiness Type Seçiniz:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,32,0,0"/>
+        <Button x:Name="buttonEkle" Content="Ekle" HorizontalAlignment="Left" Height="24" Margin="413,160,0,0" VerticalAlignment="Top" Width="100" Click="buttonEkle_Click"/>
+        <Button x:Name="buttonSil" Content="Sil" HorizontalAlignment="Left" Height="24" Margin="116,160,0,0" VerticalAlignment="Top" Width="100" Click="buttonSil_Click"/>
+        <DataGrid Name="dataGridView1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="300" Width="800" Margin="0,269,0,0"/>
+
+    </Grid>
+</Window>

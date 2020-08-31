@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfApp5.CurrencyDefination"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="CurrencyDefination" Height="250" Width="600">
+    <Grid Loaded="Grid_Loaded">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ComboBox Name="comboCurrency" HorizontalAlignment="Left" Margin="273,73,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsTextSearchEnabled="True" local:ComboBoxBehavior.CharacterCasing="Upper" />
+        <Label Content="Para Birimi Giriniz:" Height="30"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,69,0,0"/>
+        <Button Name="buttonEkle" Content="Ekle" HorizontalAlignment="Left" Height="24" Margin="413,144,0,0" VerticalAlignment="Top" Width="100" Click="buttonEkle_Click"/>
+        <Button Name="buttonSil" Content="Sil" HorizontalAlignment="Left" Height="24" Margin="116,144,0,0" VerticalAlignment="Top" Width="100" Click="buttonSil_Click"/>
+        <Button Name="buttonGuncelle" Content="Güncelle" HorizontalAlignment="Center" Height="24" Margin="0,144,0,0" VerticalAlignment="Top" Width="100" Click="buttonGuncelle_Click"/>
+        
+
+    </Grid>
+</Window>
