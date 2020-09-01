@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfApp5.StationUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="StationUpdate" Height="250" Width="1000">
+    <Grid Loaded="Grid_Loaded">
+        <ComboBox x:Name="comboDealerName" HorizontalAlignment="Left" Margin="606,118,0,0" VerticalAlignment="Top" Width="120" IsEditable="False" IsEnabled="False" local:ComboBoxBehavior.CharacterCasing="Upper" IsReadOnly="True" SelectionChanged="comboDealerName_SelectionChanged"/>
+        <ComboBox x:Name="comboBussinessType" HorizontalAlignment="Left" Margin="606,85,0,0" VerticalAlignment="Top" Width="120" IsEditable="False" IsEnabled="False" local:ComboBoxBehavior.CharacterCasing="Upper" IsReadOnly="True"/>
+        <ComboBox x:Name="comboStationName" HorizontalAlignment="Left" Margin="606,149,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsEnabled="False" local:ComboBoxBehavior.CharacterCasing="Upper"/>
+        <Label Content="Güncellenecek Olan İstasyonun Bussiness Type'ı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68,83,0,0"/>
+        <Label Content="Bussiness Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="515,83,0,0"/>
+        <Label Content="İstasyon Dağıtıcısı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="499,114,0,0"/>
+        <Label Content="İstasyon Adı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,145,0,0"/>
+        <Label Name="lblBussinessType" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="332,83,0,0"/>
+        <Label Content="Güncellenecek Olan İstasyonun Dağıtıcısı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,114,0,0"/>
+        <Label Name="lblDealer" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="332,114,0,0"/>
+        <Label Content="Güncellenecek Olan İstasyonun Adı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,145,0,0"/>
+        <Label Name="lblStationName" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="332,145,0,0"/>
+        <Button x:Name="buttonGüncellemeİsleminiTamamla" Content="Güncelleme İşlemini Tamamla" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="272,190,0,0" Click="buttonGüncellemeİsleminiTamamla_Click" Width="320"/>
+
+        <ItemsControl>
+            <Grid>
+                <RibbonCheckBox Name="checkBussnessType" Content="bt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="734,86,0,0"  Click="checkBussnessType_Click"/>
+                <Label Content="BT" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="753,82,0,0"/>
+            </Grid>
+            <Grid>
+                <RibbonCheckBox Name="checkDealer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="735,10,0,0" Click="checkDealer_Click"/>
+                <Label Content="İD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="754,6,0,0"/>
+            </Grid>
+            <Grid>
+                <RibbonCheckBox Name="checkStation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="736,10,0,0" Click="checkStation_Click"/>
+                <Label Content="İA" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="755,6,0,0"/>
+            </Grid>
+
+        </ItemsControl>
+
+    </Grid>
+</Window>

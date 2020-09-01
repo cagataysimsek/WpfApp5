@@ -29,72 +29,139 @@ namespace WpfApp5
         {
             if (comboBussinessType.SelectedValue != null && comboDealerName.SelectedValue != null && !string.IsNullOrEmpty(comboStationName.Text))
             {
-                var item = context.Stations.Where(x => x.StationName == comboStationName.Text).Where(x => x.DealerId==Convert.ToInt32(comboDealerName.SelectedValue)).FirstOrDefault();
+                var item = (from x in context.Stations where x.DealerId == (int)comboDealerName.SelectedValue && x.StationName == comboStationName.Text select x).FirstOrDefault();
                 if (item == null)
                 {
-                    var newItem = new Station();
-                    newItem.BussinessTypeId = Convert.ToInt32(comboBussinessType.SelectedValue);
-                    newItem.DealerId = Convert.ToInt32(comboDealerName.SelectedValue);
-                    newItem.StationName = comboStationName.Text;
-                    context.Stations.Add(newItem);
+                    var item2 = new Station();
+                    item2.BussinessTypeId = (int)comboBussinessType.SelectedValue;
+                    item2.DealerId = (int)comboDealerName.SelectedValue;
+                    item2.StationName = comboStationName.Text;
+                    context.Stations.Add(item2);
                     context.SaveChanges();
-                    MessageBox.Show("İstasyonu Başarıyla Eklendi.");
-                    ComboShow();
+                    MessageBox.Show(comboStationName.Text + " İstasyonu " + comboDealerName.Text + " Dağıtıcısına Bağlı ve Bussiness Type'ı " + comboBussinessType.Text + " Olarak Sisteme Kaydedildi!");
+                    comboDealerName.SelectedValue = null;
+                    comboBussinessType.SelectedValue = null;
+                    comboStationName.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show(comboDealerName.Text+" Dağıtıcısına Tanımlı Bir "+comboStationName.Text+"  İstasyonu Zaten Bulunuyor!");
+                    MessageBox.Show(comboDealerName.Text + " Dağıtıcısına Bağlı " + comboStationName.Text + " Adında Bir İstasyon Zaten Bulunmakta!");
+                    comboDealerName.SelectedValue = null;
+                    comboBussinessType.SelectedValue = null;
+                    comboStationName.Text = "";
                 }
+
             }
             else
             {
-                MessageBox.Show("Herhangi Bir Bilgi Boş Bırakılamaz!");
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
             }
         }
 
         private void buttonSil_Click(object sender, RoutedEventArgs e)
         {
+            if (comboDealerName.SelectedValue != null && comboBussinessType.SelectedValue != null && !string.IsNullOrEmpty(comboStationName.Text))
+            {
+                var item = context.Stations.Where(x => x.DealerId == (int)comboDealerName.SelectedValue && x.BussinessTypeId==(int)comboBussinessType.SelectedValue && x.StationName == comboStationName.Text).FirstOrDefault();
+                if (item!=null)
+                {
+                    context.Stations.Remove(item);
+                    context.SaveChanges();
+                    MessageBox.Show( comboDealerName.Text + " Dağıtıcısına Bağlı ve Bussiness Type'ı " + comboBussinessType.Text + " Olan " + comboStationName.Text + " İstasyonu Başarıyla Silindi");
+                    comboDealerName.SelectedValue = null;
+                    comboBussinessType.SelectedValue = null;
+                    comboStationName.Text = "";
 
+                }
+                else
+                {
+                    MessageBox.Show(comboDealerName.Text + " Dağıtıcısına Bağlı ve Bussiness Type'ı " + comboBussinessType.Text +" Olan "+ comboStationName.Text + " İstasyonu Bulunmamakta. Lütfen Bilgileri Gözden Geçiriniz!");
+                    comboDealerName.SelectedValue = null;
+                    comboBussinessType.SelectedValue = null;
+                    comboStationName.Text = "";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
+            }
+           
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            ComboShow();
-            var a = (from s in context.Stations
-                     join sl in context.Dealers on s.DealerId equals sl.Id
-                     join def in context.Definations on s.BussinessTypeId equals def.Id
-                     select  new {
-                     s.Id,
-                     s.StationName,
-                     sl.DealerName,
-                     def.DefValue,
-                     
-                     s.BussinessTypeId,
-                     s.DealerId}).ToList();
-            dataGridView1.ItemsSource = a;
+            comboBussinessType.ItemsSource = context.Definations.Where(x => x.DefType == (int)Definition.BussinessType).ToList();
+            comboBussinessType.DisplayMemberPath = "DefValue";
+            comboBussinessType.SelectedValuePath = "Id";
         }
 
         private void ComboShow()
         {
-            //comboBussinessType.ItemsSource = context.Definations.Where(x => x.DefType == 3).ToList();
-            comboBussinessType.ItemsSource = (from x in context.Definations
-                                             where x.DefType==3
-                                             select x).ToList();
-            comboBussinessType.DisplayMemberPath = "DefValue";
-            comboBussinessType.SelectedValuePath = "Id";
-            comboDealerName.ItemsSource = context.Dealers.ToList();
-            comboDealerName.DisplayMemberPath = "DealerName";
-            comboDealerName.SelectedValuePath = "Id";
-            comboStationName.Text = "";
-            comboDealerName.Text = "";
-            comboBussinessType.Text = "";
+
         }
 
         private void comboDealerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            comboStationName.ItemsSource = context.Stations.Where(x=> x.DealerId==Convert.ToInt32(comboDealerName.SelectedValue)).ToList();
-            comboStationName.DisplayMemberPath = "StationName";
-            comboStationName.SelectedValuePath = "Id";
+
+            if (comboDealerName.SelectedValue != null)
+            {
+                comboStationName.ItemsSource = context.Stations.Where(x => x.DealerId == (int)comboDealerName.SelectedValue && x.BussinessTypeId==(int)comboBussinessType.SelectedValue).ToList();
+                comboStationName.DisplayMemberPath = "StationName";
+            }
+            else
+            {
+                comboStationName.ItemsSource = null;
+            }
+
+        }
+
+        private void buttonGüncelleClick(object sender, RoutedEventArgs e)
+        {
+            if (comboBussinessType.SelectedValue!=null && comboDealerName.SelectedValue!=null && !string.IsNullOrEmpty(comboStationName.Text))
+            {
+                var item = context.Stations.Where(x => x.DealerId == (int)comboDealerName.SelectedValue && x.BussinessTypeId == (int)comboBussinessType.SelectedValue && x.StationName == comboStationName.Text).FirstOrDefault();
+                if (item!=null)
+                {
+                    StationUpdate update = new StationUpdate();
+                    update.lblBussinessType.Content = comboBussinessType.Text;
+                    update.lblDealer.Content = comboDealerName.Text;
+                    update.lblStationName.Content = comboStationName.Text;
+                    update.selectedId = item.Id;
+                    update.selectedDealerId =item.DealerId;
+                    update.selectedStationName = item.StationName;
+                    update.selectedBussnessType = item.BussinessTypeId;
+                    update.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(comboDealerName.Text + " Dağıtıcısına Bağlı ve Bussiness Type'ı " + comboBussinessType.Text + " Olan " + comboStationName.Text + " İstasyonu Bulunmamakta. Lütfen Bilgileri Gözden Geçiriniz!");
+                    comboBussinessType.SelectedValue = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
+                comboBussinessType.SelectedValue = null;
+            }
+        }
+
+        private void comboBussinessType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBussinessType.SelectedValue!=null)
+            {
+                comboDealerName.ItemsSource = (from x in context.Stations
+                                               join y in context.Dealers on x.DealerId equals y.Id
+                                               where x.BussinessTypeId == (int)comboBussinessType.SelectedValue
+                                               select y).Distinct().ToList();
+
+                comboDealerName.DisplayMemberPath = "DealerName";
+                comboDealerName.SelectedValuePath = "Id";
+            }
+            else
+            {
+                comboDealerName.ItemsSource = null;
+            }
         }
     }
 }

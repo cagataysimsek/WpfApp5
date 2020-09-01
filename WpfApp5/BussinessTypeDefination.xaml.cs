@@ -41,27 +41,28 @@ namespace WpfApp5
 
         private void buttonEkle_Click(object sender, RoutedEventArgs e)
         {
-            var item = context.Definations.Where(x => x.DefValue == comboBusinessType.Text).FirstOrDefault();
+            var item = context.Definations.Where(x => x.DefValue == comboBusinessType.Text && x.DefType == (int)Definition.BussinessType).SingleOrDefault();
             if (item == null)
             {
-                if (!string.IsNullOrEmpty(comboBusinessType.Text))
+                if (string.IsNullOrEmpty(comboBusinessType.Text))
                 {
-                    var newItem = new Defination();
-                    newItem.DefType = 3;
-                    newItem.DefValue = comboBusinessType.Text;
-                    context.Definations.Add(newItem);
-                    context.SaveChanges();
-                    MessageBox.Show(comboBusinessType.Text + "Bussiness Type Başarıyla Eklendi.");
-                    comboShow();
+                    MessageBox.Show("Para Birimi Boş Bırakılamaz!");
                 }
                 else
                 {
-                    MessageBox.Show("Boş Kayıt Eklenemez!");
+                    Defination newItem = new Defination();
+                    newItem.DefType = (int)Definition.BussinessType;
+                    newItem.DefValue = comboBusinessType.Text;
+                    context.Definations.Add(newItem);
+                    context.SaveChanges();
+                    MessageBox.Show("Ekleme İşlemi Başarılı");
+                    comboShow();
                 }
             }
             else
             {
-                MessageBox.Show(comboBusinessType.Text + " Kayıdı Zaten Var");
+                MessageBox.Show(comboBusinessType.Text + " Kayıdı Zaten Var!");
+                comboBusinessType.Text = "";
             }
         }
 
@@ -69,27 +70,43 @@ namespace WpfApp5
         {
             if (!string.IsNullOrEmpty(comboBusinessType.Text))
             {
-                var item = context.Definations.Where(x => x.Id == Convert.ToInt32(comboBusinessType.SelectedValue)).FirstOrDefault();
-                context.Definations.Remove(item);
-                context.SaveChanges();
-                string name = comboBusinessType.Text;
-                comboShow();
-                MessageBox.Show(name + "Business Type Silme işlemi Başarılı.");
+                var item = context.Definations.Where(x => x.DefValue == comboBusinessType.Text && x.DefType == (int)Definition.BussinessType).FirstOrDefault();
+                if (item != null)
+                {
+                    context.Definations.Remove(item);
+                    context.SaveChanges();
+                    string name = comboBusinessType.Text;
+                    comboShow();
+                    MessageBox.Show(name + " Bussiness Type'ı Başarıyla Silindi.");
+                }
+                else
+                {
+                    MessageBox.Show(comboBusinessType.Text + " Adında Bir Bussiness Type Bulunmamakta!");
+                    comboBusinessType.Text = "";
+                }
+
             }
         }
 
         private void buttonGuncelle_Click(object sender, RoutedEventArgs e)
         {
-            if (comboBusinessType.SelectedValue!=null)
+            var item = context.Definations.Where(x => x.DefValue == comboBusinessType.Text && x.DefType == (int)Definition.BussinessType).FirstOrDefault();
+            if (!string.IsNullOrEmpty(comboBusinessType.Text))
             {
-                BussinessTypeUpdate btu = new BussinessTypeUpdate();
-                this.Close();
-                btu.ShowDialog();
+                if (item != null)
+                {
+                    BussinessTypeUpdate bussiness = new BussinessTypeUpdate();
+                    bussiness.lblName.Content = item.DefValue;
+                    this.Close();
+                    bussiness.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show(comboBusinessType.Text + " Adında Bir Bussiness Type Bulunmamakta!");
+                    comboBusinessType.Text = "";
+                }
             }
-            else
-            {
-                MessageBox.Show("Güncelleme Yapmadan Önce Güncellemek İstediğiniz Para Birimini Seçmelisiniz.");
-            }
+            
         }
     }
 }

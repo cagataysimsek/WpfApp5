@@ -27,18 +27,27 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            //if (comboBussinessType1.SelectedValue!=null && !string.IsNullOrEmpty(txtNewBussinessTypeName.Text))
-            //{
-            //    var item = (from x in context.Definations where x.Id == Convert.ToInt32(comboBussinessType1.SelectedValue) select x).FirstOrDefault();
-            //    item.DefValue = txtNewBussinessTypeName.Text;
-            //    context.SaveChanges();
-            //    MessageBox.Show(comboBussinessType1.Text + " BussinessType " + txtNewBussinessTypeName.Text + " Olarak Değiştirildi");
-            //    this.Close();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
-            //}
+            if (!string.IsNullOrEmpty(txtNewBussinessTypeName.Text))
+            {
+                var item = (from x in context.Definations where x.DefValue == txtNewBussinessTypeName.Text && x.DefType == (int)Definition.BussinessType select x).FirstOrDefault();
+                if (item == null)
+                {
+                    var item2 = (from x in context.Definations where x.DefValue == lblName.Content.ToString() && x.DefType == (int)Definition.BussinessType select x).FirstOrDefault();
+                    item2.DefValue = txtNewBussinessTypeName.Text;
+                    context.SaveChanges();
+                    MessageBox.Show(lblName.Content + " Para Biriminin Adı " + txtNewBussinessTypeName.Text + " Olarak Değiştirildi.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(txtNewBussinessTypeName.Text + " Bussiness Type'ı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
+            }
         }
     }
 }

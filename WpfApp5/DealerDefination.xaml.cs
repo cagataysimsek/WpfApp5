@@ -28,28 +28,27 @@ namespace WpfApp5
         }
         private void buttonEkle_Click(object sender, RoutedEventArgs e)
         {
-            context.SaveChanges();
-            var item = context.Dealers.Where(x => x.DealerName == comboDealerName.Text).FirstOrDefault();
+            var item = context.Dealers.Where(x => x.DealerName == comboDealerName.Text).SingleOrDefault();
             if (item == null)
             {
-                if (!string.IsNullOrEmpty(comboDealerName.Text))
+                if (string.IsNullOrEmpty(comboDealerName.Text))
                 {
-                    var newItem = new Dealer();
-                    newItem.DealerName = comboDealerName.Text;
-                    context.Dealers.Add(newItem);
-                    context.SaveChanges();
-                    MessageBox.Show(comboDealerName.Text + " İstasyonu Baraşarıyla Eklendi.");
-                    comboShow();
+                    MessageBox.Show("Para Birimi Boş Bırakılamaz!");
                 }
                 else
                 {
-                    MessageBox.Show("İstasyon İsmi Boş Bırakılamaz!");
+                    Dealer newItem = new Dealer();
+                    newItem.DealerName = comboDealerName.Text;
+                    context.Dealers.Add(newItem);
+                    context.SaveChanges();
+                    MessageBox.Show("Ekleme İşlemi Başarılı");
+                    comboShow();
                 }
             }
             else
             {
-                MessageBox.Show(comboDealerName.Text + " İstasyonu Zaten Kayıtlı!");
-                comboShow();
+                MessageBox.Show(comboDealerName.Text + " Kayıdı Zaten Var!");
+                comboDealerName.Text = "";
             }
         }
 
@@ -65,12 +64,19 @@ namespace WpfApp5
         {
             if (!string.IsNullOrEmpty(comboDealerName.Text))
             {
-                var item = context.Dealers.Where(x => x.Id == Convert.ToInt32(comboDealerName.SelectedValue)).FirstOrDefault();
-                context.Dealers.Remove(item);
-                context.SaveChanges();
-                string name = comboDealerName.Text;
-                comboShow();
-                MessageBox.Show(name + " Dağıtıcısını Silme İşlemi Başarılı.");
+                var item = context.Dealers.Where(x => x.DealerName == comboDealerName.Text).FirstOrDefault();
+                if (item != null)
+                {
+                    context.Dealers.Remove(item);
+                    context.SaveChanges();
+                    string name = comboDealerName.Text;
+                    comboShow();
+                    MessageBox.Show(name + " Dağıtısı Başarıyla Silinidi.");
+                }
+                {
+                    MessageBox.Show(comboDealerName.Text + " Adında Bir Dağıtıcı Bulunmamakta!");
+                    comboDealerName.Text = "";
+                }
             }
         }
 
@@ -81,20 +87,22 @@ namespace WpfApp5
 
         private void buttonGüncelle_Click(object sender, RoutedEventArgs e)
         {
-            if (comboDealerName.SelectedValue!= null)
+            var item = context.Dealers.Where(x => x.DealerName == comboDealerName.Text).FirstOrDefault();
+            if (!string.IsNullOrEmpty(comboDealerName.Text))
             {
-                DealerUpdate dealerUpdate = new DealerUpdate();
-                dealerUpdate.comboDealerName1.ItemsSource = comboDealerName.ItemsSource;
-                dealerUpdate.comboDealerName1.DisplayMemberPath = comboDealerName.DisplayMemberPath;
-                dealerUpdate.comboDealerName1.SelectedValuePath = comboDealerName.SelectedValuePath;
-                dealerUpdate.comboDealerName1.SelectedValue = comboDealerName.SelectedValue;
-                this.Close();
-                dealerUpdate.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Güncelleme Yapmadan Önce Güncellemek İstediğiniz Dağıtıcıyı Seçmelisiniz.");
+                if (item != null)
+                {
+                    DealerUpdate dealer = new DealerUpdate();
+                    dealer.lblDealer.Content = item.DealerName;
+                    this.Close();
+                    dealer.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show(comboDealerName.Text + " Adında Bir Dağıtıcı Bulunmamakta!");
+                    comboDealerName.Text = "";
+                }
             }
         }
-    }
+    } 
 }

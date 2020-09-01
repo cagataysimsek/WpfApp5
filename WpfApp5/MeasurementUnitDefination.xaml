@@ -9,7 +9,7 @@
     <Grid Loaded="Grid_Loaded">
         <ComboBox x:Name="comboMeasurementUnit" HorizontalAlignment="Left" Margin="273,73,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" local:ComboBoxBehavior.CharacterCasing="Upper" />
         <Label Content="Ölçü Birimi Giriniz:" Height="30"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,69,0,0"/>
-        <Button x:Name="buttonEkle" Content="Ekle" HorizontalAlignment="Left" Height="24" Margin="379,144,0,0" VerticalAlignment="Top" Width="93" Click="buttonEkle_Click"/>
+        <Button x:Name="buttonEkle" Content="Ekle" HorizontalAlignment="Left" Height="24" Margin="399,144,0,0" VerticalAlignment="Top" Width="93" Click="buttonEkle_Click"/>
         <Button x:Name="buttonSil" Content="Sil" HorizontalAlignment="Left" Height="24" Margin="130,144,0,0" VerticalAlignment="Top" Width="101" Click="buttonSil_Click" />
         <Button Name="buttonGuncelle" Content="Güncelle" HorizontalAlignment="Left" Height="24" Margin="259,144,0,0" VerticalAlignment="Top" Width="100" Click="buttonGuncelle_Click"/>
 
