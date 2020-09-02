@@ -94,6 +94,8 @@ namespace WpfApp5
                 {
                     DealerUpdate dealer = new DealerUpdate();
                     dealer.lblDealer.Content = item.DealerName;
+                    dealer.comboDealerName.ItemsSource = comboDealerName.ItemsSource;
+                    dealer.comboDealerName.DisplayMemberPath = comboDealerName.DisplayMemberPath;
                     this.Close();
                     dealer.ShowDialog();
                 }

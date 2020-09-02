@@ -28,13 +28,22 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            if (comboSupplierName1.SelectedValue!=null && !string.IsNullOrEmpty(txtNewSupplierName.Text))
+            if (!string.IsNullOrEmpty(comboSupplierName1.Text))
             {
-                var item = (from x in context.Suppliers where x.Id == Convert.ToInt32(comboSupplierName1.SelectedValue) select x).FirstOrDefault();
-                item.SupplierName = txtNewSupplierName.Text;
-                context.SaveChanges();
-                MessageBox.Show(comboSupplierName1.Text + " Terarikçisinin Adı " + txtNewSupplierName.Text + " Olarak Değiştirildi.");
-                this.Close();
+                var item = (from x in context.Suppliers where x.SupplierName == comboSupplierName1.Text select x).FirstOrDefault();
+                if (item==null)
+                {
+                    var item2 = context.Suppliers.Where(x => x.SupplierName == lblSupplierName.Content.ToString()).FirstOrDefault();
+                    item2.SupplierName = comboSupplierName1.Text;
+                    context.SaveChanges();
+                    MessageBox.Show(lblSupplierName.Content.ToString() + " Terarikçisinin Adı " + comboSupplierName1.Text + " Olarak Değiştirildi.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(comboSupplierName1.Text + " Adında Bir Tedarikçi Zaten Var!!!");
+                    comboSupplierName1.Text = "";
+                } 
             }
             else
             {

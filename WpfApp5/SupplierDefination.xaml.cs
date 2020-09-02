@@ -68,30 +68,38 @@ namespace WpfApp5
         }
         private void buttonSil_Click(object sender, RoutedEventArgs e)
         {
-            var item = (from x in context.Suppliers where x.Id == Convert.ToInt32(comboSupplierName.SelectedValue) select x).FirstOrDefault();
-            context.Suppliers.Remove(item);
-            context.SaveChanges();
-            string name = comboSupplierName.Text;
-            comboSupplierName.Text = "";
-            MessageBox.Show(name +" Tedarikçisi Başarıyla Silindi");
-            comboShow();
+            var item = (from x in context.Suppliers where x.SupplierName==comboSupplierName.Text select x).FirstOrDefault();
+            if (item!=null)
+            {
+                context.Suppliers.Remove(item);
+                context.SaveChanges();
+                string name = comboSupplierName.Text;
+                comboSupplierName.Text = "";
+                MessageBox.Show(name + " Tedarikçisi Başarıyla Silindi");
+                comboShow();
+            }
+            else
+            {
+                MessageBox.Show(comboSupplierName.Text + " Adında Bir Tedarikçi Bulunmamakta!");
+            }
         }
 
         private void buttonGuncelle_Click(object sender, RoutedEventArgs e)
         {
-            if (comboSupplierName.SelectedValue!=null)
+            var item = context.Suppliers.Where(x => x.SupplierName == comboSupplierName.Text).FirstOrDefault();
+            if (item!=null)
             {
                 SupplierUpdate sup = new SupplierUpdate();
                 sup.comboSupplierName1.ItemsSource = comboSupplierName.ItemsSource;
                 sup.comboSupplierName1.DisplayMemberPath = comboSupplierName.DisplayMemberPath;
                 sup.comboSupplierName1.SelectedValuePath = comboSupplierName.SelectedValuePath;
-                sup.comboSupplierName1.SelectedValue = comboSupplierName.SelectedValue;
+                sup.lblSupplierName.Content = comboSupplierName.Text;
                 this.Close();
                 sup.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Güncelleme Yapmadan Önce Güncellemek İstediğiniz Tedarikçiyi Seçmelisiniz.");
+                MessageBox.Show(comboSupplierName.Text+" Adında Bir Tadarikçi Bulunmamaktadır!!!");
             }
         }
     }

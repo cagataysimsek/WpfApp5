@@ -10,7 +10,7 @@
         <Label Name="lblName" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,42,0,0"/>
         <Label Content="Güncellenecek Olan Ölçü Birimi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="124,42,0,0"/>
         <Label Content="Güncelleneceği Ad:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,84,0,0"/>
-        <TextBox x:Name="txtNewMeasurementName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="305,88,0,0" CharacterCasing="Upper" />
+        <ComboBox x:Name="comboNewMeasurementName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="305,88,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" IsEditable="True" />
         <Button x:Name="buttonGüncellemeİsleminiTamamla" Content="Güncelleme İşlemini Tamamla" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,148,0,0" Click="buttonGüncellemeİsleminiTamamla_Click"/>
     </Grid>
 </Window>

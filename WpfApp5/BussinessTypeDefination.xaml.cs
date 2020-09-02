@@ -96,6 +96,8 @@ namespace WpfApp5
                 if (item != null)
                 {
                     BussinessTypeUpdate bussiness = new BussinessTypeUpdate();
+                    bussiness.comboNewBussinessTypeName.ItemsSource = comboBusinessType.ItemsSource;
+                    bussiness.comboNewBussinessTypeName.DisplayMemberPath = "DefValue";
                     bussiness.lblName.Content = item.DefValue;
                     this.Close();
                     bussiness.ShowDialog();

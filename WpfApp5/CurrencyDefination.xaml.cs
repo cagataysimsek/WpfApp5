@@ -99,6 +99,7 @@ namespace WpfApp5
                 if (item != null)
                 {
                     CurrencyUpdate currency = new CurrencyUpdate();
+                    currency.comboNewCurrencyName.ItemsSource = comboCurrency.ItemsSource;
                     currency.lblName.Content = item.DefValue;
                     this.Close();
                     currency.ShowDialog();

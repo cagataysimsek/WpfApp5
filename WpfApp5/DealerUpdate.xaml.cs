@@ -27,20 +27,20 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtDealerName.Text))
+            if (!string.IsNullOrEmpty(comboDealerName.Text))
             {
-                var item = (from x in context.Dealers where x.DealerName == txtDealerName.Text.ToString() select x).FirstOrDefault();
+                var item = (from x in context.Dealers where x.DealerName == comboDealerName.Text.ToString() select x).FirstOrDefault();
                 if (item == null)
                 {
                     var item2 = (from x in context.Dealers where x.DealerName == lblDealer.Content.ToString() select x).FirstOrDefault();
-                    item2.DealerName = txtDealerName.Text;
+                    item2.DealerName = comboDealerName.Text;
                     context.SaveChanges();
-                    MessageBox.Show(lblDealer.Content + " Dağıtıcısının Adı " + txtDealerName.Text + " Olarak Değiştirildi.");
+                    MessageBox.Show(lblDealer.Content + " Dağıtıcısının Adı " + comboDealerName.Text + " Olarak Değiştirildi.");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show(txtDealerName.Text + " Dağıtıcısı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                    MessageBox.Show(comboDealerName.Text + " Dağıtıcısı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
                 }
 
             }

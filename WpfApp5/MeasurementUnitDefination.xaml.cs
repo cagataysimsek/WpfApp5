@@ -93,6 +93,8 @@ namespace WpfApp5
                 {
                     MeasurementUnitUpdate measurement = new MeasurementUnitUpdate();
                     measurement.lblName.Content = item.DefValue;
+                    measurement.comboNewMeasurementName.ItemsSource = comboMeasurementUnit.ItemsSource;
+                    measurement.comboNewMeasurementName.DisplayMemberPath = comboMeasurementUnit.DisplayMemberPath;
                     this.Close();
                     measurement.ShowDialog();
                 }

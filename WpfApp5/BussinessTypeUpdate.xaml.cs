@@ -27,20 +27,20 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtNewBussinessTypeName.Text))
+            if (!string.IsNullOrEmpty(comboNewBussinessTypeName.Text))
             {
-                var item = (from x in context.Definations where x.DefValue == txtNewBussinessTypeName.Text && x.DefType == (int)Definition.BussinessType select x).FirstOrDefault();
+                var item = (from x in context.Definations where x.DefValue == comboNewBussinessTypeName.Text && x.DefType == (int)Definition.BussinessType select x).FirstOrDefault();
                 if (item == null)
                 {
                     var item2 = (from x in context.Definations where x.DefValue == lblName.Content.ToString() && x.DefType == (int)Definition.BussinessType select x).FirstOrDefault();
-                    item2.DefValue = txtNewBussinessTypeName.Text;
+                    item2.DefValue = comboNewBussinessTypeName.Text;
                     context.SaveChanges();
-                    MessageBox.Show(lblName.Content + " Para Biriminin Adı " + txtNewBussinessTypeName.Text + " Olarak Değiştirildi.");
+                    MessageBox.Show(lblName.Content + " Para Biriminin Adı " + comboNewBussinessTypeName.Text + " Olarak Değiştirildi.");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show(txtNewBussinessTypeName.Text + " Bussiness Type'ı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                    MessageBox.Show(comboNewBussinessTypeName.Text + " Bussiness Type'ı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
                 }
 
             }

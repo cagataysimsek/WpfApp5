@@ -27,15 +27,15 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            var item = (from x in context.Definations where x.DefValue == txtNewMeasurementName.Text && x.DefType == (int)Definition.Unit select x).FirstOrDefault();
+            var item = (from x in context.Definations where x.DefValue == comboNewMeasurementName.Text && x.DefType == (int)Definition.Unit select x).FirstOrDefault();
             if (item == null)
             {
-                if (!string.IsNullOrEmpty(txtNewMeasurementName.Text))
+                if (!string.IsNullOrEmpty(comboNewMeasurementName.Text))
                 {
                     var item2 = (from x in context.Definations where x.DefValue == lblName.Content.ToString() && x.DefType == (int)Definition.Unit select x).FirstOrDefault();
-                    item2.DefValue = txtNewMeasurementName.Text;
+                    item2.DefValue = comboNewMeasurementName.Text;
                     context.SaveChanges();
-                    MessageBox.Show(lblName.Content + " Ölçü Biriminin Adı " + txtNewMeasurementName.Text + " Olarak Değiştirildi.");
+                    MessageBox.Show(lblName.Content + " Ölçü Biriminin Adı " + comboNewMeasurementName.Text + " Olarak Değiştirildi.");
                     this.Close();
                 }
                 else
@@ -45,7 +45,7 @@ namespace WpfApp5
             }
             else
             {
-                MessageBox.Show(txtNewMeasurementName.Text + "Ölçü Birimi Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir Ölçü Birimi Giriniz!");
+                MessageBox.Show(comboNewMeasurementName.Text + "Ölçü Birimi Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir Ölçü Birimi Giriniz!");
             }
         }
     }
