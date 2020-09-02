@@ -41,6 +41,7 @@ namespace WpfApp5
                 else
                 {
                     MessageBox.Show(comboDealerName.Text + " Dağıtıcısı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                    comboDealerName.SelectedValue = null;
                 }
 
             }

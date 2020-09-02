@@ -47,6 +47,7 @@ namespace WpfApp5
                 else
                 {
                     MessageBox.Show(comboNewCurrencyName.Text + "Para Birimi Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                    comboNewCurrencyName.SelectedValue = null;
                 }
                 
             }

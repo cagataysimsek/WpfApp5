@@ -41,6 +41,7 @@ namespace WpfApp5
                 else
                 {
                     MessageBox.Show(comboNewBussinessTypeName.Text + " Bussiness Type'ı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                    comboNewBussinessTypeName.SelectedValue = null;
                 }
 
             }

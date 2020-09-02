@@ -100,6 +100,7 @@ namespace WpfApp5
                 {
                     CurrencyUpdate currency = new CurrencyUpdate();
                     currency.comboNewCurrencyName.ItemsSource = comboCurrency.ItemsSource;
+                    currency.comboNewCurrencyName.DisplayMemberPath = comboCurrency.DisplayMemberPath;
                     currency.lblName.Content = item.DefValue;
                     this.Close();
                     currency.ShowDialog();
