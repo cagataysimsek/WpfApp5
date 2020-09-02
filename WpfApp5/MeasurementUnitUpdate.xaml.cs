@@ -46,6 +46,7 @@ namespace WpfApp5
             else
             {
                 MessageBox.Show(comboNewMeasurementName.Text + "Ölçü Birimi Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir Ölçü Birimi Giriniz!");
+                comboNewMeasurementName.Text = null;
             }
         }
     }
