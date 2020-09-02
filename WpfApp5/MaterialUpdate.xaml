@@ -1,0 +1,20 @@
+﻿<Window x:Class="WpfApp5.MaterialUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="MaterialUpdate" Height="230" Width="750">
+    <Grid Loaded="Grid_Loaded">
+        <ComboBox x:Name="comboOlcuBirimi" HorizontalAlignment="Left" Margin="516,88,0,0" VerticalAlignment="Top" Width="120"  local:ComboBoxBehavior.CharacterCasing="Upper" IsReadOnly="True"/>
+        <ComboBox x:Name="comboMaterialName" HorizontalAlignment="Left" Margin="516,55,0,0" VerticalAlignment="Top" Width="120" IsEditable="True"  local:ComboBoxBehavior.CharacterCasing="Upper"/>
+        <Label Content="Güncellenecek Olan Materyal Adı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="119,55,0,0"/>
+        <Label Content="Ad:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="484,53,0,0"/>
+        <Label Content="Ölçü Birimi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="443,88,0,0"/>
+        <Label Name="lblMaterialName" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="312,57,0,0"/>
+        <Label Content="Güncellenecek Olan Materyalin Ölçü Birimi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,88,0,0"/>
+        <Label Name="lblMeasurementUnit" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="312,88,0,0"/>
+        <Button x:Name="buttonGüncellemeİsleminiTamamla" Content="Güncelleme İşlemini Tamamla" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="238,149,0,0" Click="buttonGüncellemeİsleminiTamamla_Click" Width="320"/>
+    </Grid>
+</Window>

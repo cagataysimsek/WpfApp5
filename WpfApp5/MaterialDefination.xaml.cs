@@ -27,40 +27,66 @@ namespace WpfApp5
 
         private void buttonEkle_Click(object sender, RoutedEventArgs e)
         {
-            if (radioAdd.IsChecked == true)
+            //if (radioAdd.IsChecked == true)
+            //{
+            //    if (!string.IsNullOrEmpty(comboMaterialName.Text) && comboOlcuBirimi.SelectedValue != null)
+            //    {
+            //        var item = (from x in context.Materials where x.MaterialName == comboMaterialName.Text select x).FirstOrDefault();
+            //        if (item == null)
+            //        {
+            //            var NewItem = new Material();
+            //            NewItem.MaterialName = comboMaterialName.Text;
+            //            NewItem.DefId = Convert.ToInt32(comboOlcuBirimi.SelectedValue);
+            //            context.Materials.Add(NewItem);
+            //            context.SaveChanges();
+            //            MessageBox.Show(comboMaterialName.Text + " Materyali " + comboOlcuBirimi.Text + " Ölçü Birimiyle Sisteme Kayıt Edildi.");
+            //            comboMaterialName.Text = "";
+            //            comboOlcuBirimi.SelectedValue = null;
+            //            comboMaterialNameShow();
+            //            radioAdd.IsChecked = false;
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show(comboMaterialName.Text + " Materyali Zaten Var.");
+            //            comboMaterialName.Text = "";
+            //            comboOlcuBirimi.SelectedValue = null;
+            //            radioAdd.IsChecked = false;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Materyal Adı veya Ölçü Birimi Boş Bırakılamaz!");
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Gerçekleştirilecek İşlemi Doğru İşaretlemediniz!");
+            //}
+            if (!string.IsNullOrEmpty(comboMaterialName.Text) && comboOlcuBirimi.SelectedValue!=null)
             {
-                if (!string.IsNullOrEmpty(comboMaterialName.Text) && comboOlcuBirimi.SelectedValue != null)
+                var item = context.Materials.Where(x => x.MaterialName == comboMaterialName.Text).FirstOrDefault();
+                if (item==null)
                 {
-                    var item = (from x in context.Materials where x.MaterialName == comboMaterialName.Text select x).FirstOrDefault();
-                    if (item == null)
-                    {
-                        var NewItem = new Material();
-                        NewItem.MaterialName = comboMaterialName.Text;
-                        NewItem.DefId = Convert.ToInt32(comboOlcuBirimi.SelectedValue);
-                        context.Materials.Add(NewItem);
-                        context.SaveChanges();
-                        MessageBox.Show(comboMaterialName.Text + " Materyali " + comboOlcuBirimi.Text + " Ölçü Birimiyle Sisteme Kayıt Edildi.");
-                        comboMaterialName.Text = "";
-                        comboOlcuBirimi.SelectedValue = null;
-                        comboMaterialNameShow();
-                        radioAdd.IsChecked = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show(comboMaterialName.Text + " Materyali Zaten Var.");
-                        comboMaterialName.Text = "";
-                        comboOlcuBirimi.SelectedValue = null;
-                        radioAdd.IsChecked = false;
-                    }
+                    var newItem = new Material();
+                    newItem.MaterialName = comboMaterialName.Text;
+                    newItem.DefId =(int) comboOlcuBirimi.SelectedValue;
+                    context.Materials.Add(newItem);
+                    context.SaveChanges();
+                    MessageBox.Show(comboMaterialName.Text+" Kayıdı Başarıyla Eklendi");
+                    comboMaterialName.Text = "";
+                    comboOlcuBirimi.SelectedValue = null;
+                    comboMaterialNameShow();
                 }
                 else
                 {
-                    MessageBox.Show("Materyal Adı veya Ölçü Birimi Boş Bırakılamaz!");
+                    MessageBox.Show(comboMaterialName.Text+" Adında Bir Materyal Zaten Bulunuyor!!!");
+                    comboMaterialName.Text = "";
+                    comboOlcuBirimi.SelectedValue = null;
                 }
             }
             else
             {
-                MessageBox.Show("Gerçekleştirilecek İşlemi Doğru İşaretlemediniz!");
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
             }
 
 
@@ -75,46 +101,66 @@ namespace WpfApp5
 
         private void buttonGuncelle_Click(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrEmpty( comboMaterialName.Text) && comboOlcuBirimi.SelectedValue!=null)
+            {
+                var item = context.Materials.Where(x => x.MaterialName == comboMaterialName.Text && x.DefId == (int)comboOlcuBirimi.SelectedValue).FirstOrDefault();
+                if (item!=null)
+                {
+                    MaterialUpdate m = new MaterialUpdate();
+                    m.lblMaterialName.Content = comboMaterialName.Text;
+                    m.lblMeasurementUnit.Content = comboOlcuBirimi.Text;
+                    m.previusMaterialId = item.Id;
+                    this.Close();
+                    m.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Ölçü Birimi " + comboOlcuBirimi.Text + " Olan " + comboMaterialName.Text + " Adında Bir Materyal Bulunmamaktadır!!!");
+                    comboMaterialName.Text = "";
+                    comboOlcuBirimi.SelectedValue = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!!!");
+            }
         }
 
         private void buttonSil_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!string.IsNullOrEmpty( comboMaterialName.Text) && comboOlcuBirimi.SelectedValue!=null)
+            {
+                var item = context.Materials.Where(x => x.MaterialName == comboMaterialName.Text && x.DefId == (int)comboOlcuBirimi.SelectedValue).FirstOrDefault();
+                if (item != null)
+                {
+                    context.Materials.Remove(item);
+                    context.SaveChanges();
+                    MessageBox.Show(comboMaterialName.Text + " Materiyali Başarıyla Silindi.");
+                    comboMaterialName.Text = "";
+                    comboOlcuBirimi.SelectedValue = null;
+                    comboMaterialNameShow();
+                }
+                else
+                {
+                    MessageBox.Show("Ölçü Birimi "+comboOlcuBirimi.Text+" Olan "+comboMaterialName.Text + " Adında Bir Materyal Bulunmamaktadır!!!");
+                    comboMaterialName.Text = "";
+                    comboOlcuBirimi.SelectedValue = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!!!");
+            }
+           
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            comboOlcuBirimi.ItemsSource = context.Definations.Where(x => x.DefType == 2).ToList();
+            comboOlcuBirimi.ItemsSource = context.Definations.Where(x => x.DefType ==(int) Definition.Unit).ToList();
             comboOlcuBirimi.DisplayMemberPath = "DefValue";
             comboOlcuBirimi.SelectedValuePath = "Id";
             comboMaterialNameShow();
         }
 
-        private void comboMaterialName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (radioGüncelle.IsChecked==true && comboMaterialName.SelectedValue!=null)
-            {
-                var item = context.Materials.Where(x => x.Id == Convert.ToInt32(comboMaterialName.SelectedValue)).FirstOrDefault();
-                comboOlcuBirimi.SelectedValue = item.DefId;
-            }
-            
-
-
-        }
-
-        private void radioGüncelle_Checked(object sender, RoutedEventArgs e)
-        {
-            comboMaterialName.IsEditable = true;
-            comboMaterialName.Text = null;
-            comboOlcuBirimi.Text = null;
-        }
-        private void radioAdd_Checked(object sender, RoutedEventArgs e)
-        {
-            comboMaterialName.IsEditable = true;
-            comboMaterialName.Text = null;
-            comboOlcuBirimi.Text = null;
-            
-
-        }
     }
 }

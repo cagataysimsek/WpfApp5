@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
 
 namespace Models
 {

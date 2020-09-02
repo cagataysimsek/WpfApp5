@@ -8,13 +8,11 @@
         Title="MaterialDefination" Height="250" Width="600">
     <Grid Loaded="Grid_Loaded">
         <ComboBox x:Name="comboOlcuBirimi" HorizontalAlignment="Left" Margin="300,89,0,0" VerticalAlignment="Top" Width="120" IsEditable="False" local:ComboBoxBehavior.CharacterCasing="Upper" />
-        <ComboBox x:Name="comboMaterialName" HorizontalAlignment="Left" Margin="300,45,0,0" VerticalAlignment="Top" Width="120"  IsTextSearchEnabled="True"  local:ComboBoxBehavior.CharacterCasing="Upper" IsEditable="False"  SelectionChanged="comboMaterialName_SelectionChanged" />
+        <ComboBox x:Name="comboMaterialName" HorizontalAlignment="Left" Margin="300,45,0,0" VerticalAlignment="Top" Width="120"  IsTextSearchEnabled="True"  local:ComboBoxBehavior.CharacterCasing="Upper" IsEditable="True"/>
         <Label Content="Materyal Adı Giriniz:" Height="30"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="179,41,0,0"/>
         <Label Content="Materyal Ölçü Birimi Seçiniz:" Height="30"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="141,85,0,0"/>
         <Button x:Name="buttonEkle" Content="Ekle" HorizontalAlignment="Left" Height="24" Margin="398,145,0,0" VerticalAlignment="Top" Width="92" Click="buttonEkle_Click"/>
         <Button x:Name="buttonSil" Content="Sil" HorizontalAlignment="Left" Height="24" Margin="102,145,0,0" VerticalAlignment="Top" Width="100" Click="buttonSil_Click"/>
         <Button x:Name="buttonGuncelle" Content="Güncelle" HorizontalAlignment="Center" Height="24" Margin="0,145,0,0" VerticalAlignment="Top" Width="100" Click="buttonGuncelle_Click"/>
-        <RadioButton Content="Ekleme İşlemi" Name="radioAdd" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="181,19,0,0" Checked="radioAdd_Checked" />
-        <RadioButton Content="Güncelleme İşlemi" Name="radioGüncelle" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="329,19,0,0" Checked="radioGüncelle_Checked"/>
     </Grid>
 </Window>
