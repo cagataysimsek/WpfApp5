@@ -35,11 +35,20 @@ namespace WpfApp5
         {
             if (!string.IsNullOrEmpty(txtNewCurrencyName.Text))
             {
-                var item = (from x in context.Definations where x.DefValue == lblName.Content.ToString() && x.DefType==(int)Definition.Currency  select x).FirstOrDefault();
-                item.DefValue = txtNewCurrencyName.Text;
-                context.SaveChanges();
-                MessageBox.Show(lblName.Content + " Para Biriminin Adı " + txtNewCurrencyName.Text + " Olarak Değiştirildi.");
-                this.Close();
+                var item = (from x in context.Definations where x.DefValue == txtNewCurrencyName.Text && x.DefType == (int)Definition.Currency select x).FirstOrDefault();
+                if (item==null)
+                {
+                    var item2 = (from x in context.Definations where x.DefValue == lblName.Content.ToString() && x.DefType == (int)Definition.Currency select x).FirstOrDefault();
+                    item2.DefValue = txtNewCurrencyName.Text;
+                    context.SaveChanges();
+                    MessageBox.Show(lblName.Content + " Para Biriminin Adı " + txtNewCurrencyName.Text + " Olarak Değiştirildi.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(txtNewCurrencyName.Text + "Para Birimi Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                }
+                
             }
             else
             {

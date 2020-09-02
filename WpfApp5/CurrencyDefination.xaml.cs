@@ -30,8 +30,8 @@ namespace WpfApp5
 
         private void buttonEkle_Click(object sender, RoutedEventArgs e)
         {
-            var item = context.Definations.Where(x=>x.DefValue==comboCurrency.Text).SingleOrDefault();
-            if (item==null)
+            var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType == (int)Definition.Currency).SingleOrDefault();
+            if (item == null)
             {
                 if (string.IsNullOrEmpty(comboCurrency.Text))
                 {
@@ -40,19 +40,20 @@ namespace WpfApp5
                 else
                 {
                     Defination newItem = new Defination();
-                    newItem.DefType =(int)Definition.Currency);
+                    newItem.DefType = (int)Definition.Currency;
                     newItem.DefValue = comboCurrency.Text;
                     context.Definations.Add(newItem);
                     context.SaveChanges();
                     MessageBox.Show("Ekleme İşlemi Başarılı");
                     comboShow();
-                } 
+                }
             }
             else
             {
                 MessageBox.Show(comboCurrency.Text + " Kayıdı Zaten Var!");
+                comboCurrency.Text = "";
             }
-            
+
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -64,7 +65,7 @@ namespace WpfApp5
         private void comboShow()
         {
             comboCurrency.Text = "";
-            comboCurrency.ItemsSource = context.Definations.Where(x=>x.DefType==1).ToList();
+            comboCurrency.ItemsSource = context.Definations.Where(x => x.DefType == 1).ToList();
             comboCurrency.DisplayMemberPath = "DefValue";
             comboCurrency.SelectedValuePath = "Id";
         }
@@ -73,8 +74,8 @@ namespace WpfApp5
         {
             if (!string.IsNullOrEmpty(comboCurrency.Text))
             {
-                var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType==(int)Definition.Currency).FirstOrDefault();
-                if (item!=null)
+                var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType == (int)Definition.Currency).FirstOrDefault();
+                if (item != null)
                 {
                     context.Definations.Remove(item);
                     context.SaveChanges();
@@ -84,27 +85,30 @@ namespace WpfApp5
                 }
                 else
                 {
-                    MessageBox.Show(comboCurrency.Text + " Adında Bir Para Birimi Bulunmamakta!");
+                    MessageBox.Show(comboCurrency.Text + " Adında Para Birimi Bulunmamakta!");
                     comboCurrency.Text = "";
                 }
-                
             }
         }
 
         private void buttonGuncelle_Click(object sender, RoutedEventArgs e)
         {
             var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType == (int)Definition.Currency).FirstOrDefault();
-            if (item!=null)
+            if (!string.IsNullOrEmpty(comboCurrency.Text))
             {
-                CurrencyUpdate currency = new CurrencyUpdate();
-                currency.lblName.Content = item.DefValue;
-                this.Close();
-                currency.ShowDialog();
+                if (item != null)
+                {
+                    CurrencyUpdate currency = new CurrencyUpdate();
+                    currency.lblName.Content = item.DefValue;
+                    this.Close();
+                    currency.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show(comboCurrency.Text + " Adında Para Birimi Bulunmamakta!");
+                    comboCurrency.Text = "";
+                }
             }
-            else
-            {
-                //MessageBox.Show(comboCurrency.Text + " Adında Bir Para Birimi Bulunmamakta!");
-            }   
         }
     }
 }

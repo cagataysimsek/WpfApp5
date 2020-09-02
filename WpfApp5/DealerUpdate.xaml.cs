@@ -27,17 +27,26 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            if (comboDealerName1.SelectedItem!=null && !string.IsNullOrEmpty(txtDealerName.Text))
+            if (!string.IsNullOrEmpty(txtDealerName.Text))
             {
-                var item = (from x in context.Dealers where x.Id == Convert.ToInt32(comboDealerName1.SelectedValue) select x).FirstOrDefault();
-                item.DealerName = txtDealerName.Text;
-                context.SaveChanges();
-                MessageBox.Show(comboDealerName1.Text + " Dağıtıcı Adı " + txtDealerName.Text + " Olarak Değiştirildi.");
-                this.Close();
+                var item = (from x in context.Dealers where x.DealerName == txtDealerName.Text.ToString() select x).FirstOrDefault();
+                if (item == null)
+                {
+                    var item2 = (from x in context.Dealers where x.DealerName == lblDealer.Content.ToString() select x).FirstOrDefault();
+                    item2.DealerName = txtDealerName.Text;
+                    context.SaveChanges();
+                    MessageBox.Show(lblDealer.Content + " Dağıtıcısının Adı " + txtDealerName.Text + " Olarak Değiştirildi.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(txtDealerName.Text + " Dağıtıcısı Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir isim Giriniz!");
+                }
+
             }
             else
             {
-                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz.");
+                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
             }
         }
     }

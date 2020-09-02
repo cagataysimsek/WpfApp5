@@ -27,17 +27,25 @@ namespace WpfApp5
 
         private void buttonGüncellemeİsleminiTamamla_Click(object sender, RoutedEventArgs e)
         {
-            if (comboMeasurementName1.SelectedValue!=null && !string.IsNullOrEmpty(txtNewMeasurementName.Text))
+            var item = (from x in context.Definations where x.DefValue == txtNewMeasurementName.Text && x.DefType == (int)Definition.Unit select x).FirstOrDefault();
+            if (item == null)
             {
-                var item = (from x in context.Definations where x.Id == Convert.ToInt32(comboMeasurementName1.SelectedValue) select x).FirstOrDefault();
-                item.DefValue = txtNewMeasurementName.Text;
-                context.SaveChanges();
-                MessageBox.Show(comboMeasurementName1.Text + " Ölçü Biriminin Adı " + txtNewMeasurementName.Text + " Olarak Değiştirildi.");
-                this.Close();
+                if (!string.IsNullOrEmpty(txtNewMeasurementName.Text))
+                {
+                    var item2 = (from x in context.Definations where x.DefValue == lblName.Content.ToString() && x.DefType == (int)Definition.Unit select x).FirstOrDefault();
+                    item2.DefValue = txtNewMeasurementName.Text;
+                    context.SaveChanges();
+                    MessageBox.Show(lblName.Content + " Ölçü Biriminin Adı " + txtNewMeasurementName.Text + " Olarak Değiştirildi.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz!");
+                }
             }
             else
             {
-                MessageBox.Show("Herhangi Bir Alan Boş Bırakılamaz.");
+                MessageBox.Show(txtNewMeasurementName.Text + "Ölçü Birimi Daha Once Tanımlanmış! Lütfen Başka Sistemde Olmayan Bir Ölçü Birimi Giriniz!");
             }
         }
     }
