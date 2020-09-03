@@ -4,14 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MaterialInputOutput" Height="800" Width="1400">
-    <Grid>
-        <Label Content="Materyal Adı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,36,0,0"/>
-        <Label Content="Tedarikçi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,67,0,0"/>
-        <Label Content="Miktar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="133,93,0,0"/>
-        <Label Content="Para Birimi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="117,124,0,0"/>
-        <Label Content="İşlemi Gerçekleştiren Yetkili:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,186,0,0"/>
-        <Label Name="lbl" Content="Ücret:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,155,0,0"/>
+    <Grid Loaded="Grid_Loaded">
+        <Label Name="lblOperationType" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,71,0,0" FontSize="30" Foreground="DarkOrange" FontWeight="ExtraBold"/>
+        <Button x:Name="buttonInput" Content=" Materyal Girişi" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,33,0,0" Width="100" Height="27" Click="buttonInput_Click"/>
+        <Button x:Name="buttonOutput" Content="Materyal Çıkışı" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,33,0,0" Width="100" Height="27" Click="buttonOutput_Click"/>
+        <Label Name="one" Content="Materyal Adı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,139,0,0"/>
+        <Label Name="two" Content="Tedarikçi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="53,177,0,0"/>
+        <Label Name="three" Content="Miktar:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,212,0,0"/>
+        <Label Name="four"  Content="Para Birimi:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="43,246,0,0"/>
+        <Label Name="six" Content=" Yetkili:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="58,308,0,0"/>
+        <Label Name="eight" Content="Dağıtıcı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="51,374,0,0"/>
+        <Label Name="seven" Content="BussinessType:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,338,0,0"/>
+        <Label Name="nine" Content="İstasyon Adı:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,414,0,0"/>
+        <Label Name="five" Content="Ücret:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,276,0,0"/>
+        <Label Content="İşlem Türü Seçiniz:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,33,0,0" FontSize="15" Foreground="DarkOrange"  FontWeight="UltraBold" Width="151"/>
+        <ComboBox Name="comboMaterial" Width="200" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="111,141,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" />
+        <ComboBox Name="comboCurrency" Width="200" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="111,248,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" />
+        <ComboBox Name="comboSupplier" Width="200" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="111,179,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" />
+        <ComboBox Name="comboDelaer" Width="200" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="111,374,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" SelectionChanged="comboDelaer_SelectionChanged" />
+        <ComboBox Name="comboBussinessType" Width="200" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="111,338,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" SelectionChanged="comboBussinessType_SelectionChanged" />
+        <ComboBox Name="comboStation" Width="200" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="111,414,0,0" local:ComboBoxBehavior.CharacterCasing="Upper" />
+        <xctk:DoubleUpDown Name="doubleUpDownQuantity" FormatString="F1" Height="24" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="111,212,0,0"/>
+        <xctk:DoubleUpDown Name="doubleUpDownFee" FormatString="F1" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="111,280,0,0" Width="200"/>
+        <TextBox x:Name="txtOfficalName" HorizontalAlignment="Left" VerticalAlignment="Top" IsReadOnly="True" Margin="111,312,0,0" Width="200" Text=""/>
+        <RadioButton x:Name="radioGift" Content="Eşantiyon" HorizontalAlignment="Left" Margin="64,120,0,0" VerticalAlignment="Top" Checked="radioGift_Checked"/>
+        <RadioButton x:Name="radioLoss"  Content="Zaiyat" HorizontalAlignment="Left" Margin="165,120,0,0" VerticalAlignment="Top" Checked="radioLoss_Checked"/>
+        <RadioButton x:Name="radioSales" Content="Satış" HorizontalAlignment="Left" Margin="248,120,0,0" VerticalAlignment="Top" Checked="radioSales_Checked"/>
+        <Button x:Name="buttonAdd" Content="Ekle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="262,472,0,0" Click="buttonAdd_Click" />
+        <Button x:Name="buttonUpdate" Content="Güncelle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="141,472,0,0" />
+        <Button x:Name="buttonDelete" Content="Sil" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="27,472,0,0" />
+        <Label Name="lblUnit" Content="(lblUnit)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,210,0,0" />
+        <DataGrid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,20" Width="980" Height="740"/>
+        
+
     </Grid>
 </Window>
