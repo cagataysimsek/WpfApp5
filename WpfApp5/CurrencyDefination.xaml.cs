@@ -64,6 +64,7 @@ namespace WpfApp5
 
         private void comboShow()
         {
+            
             comboCurrency.Text = "";
             comboCurrency.ItemsSource = context.Definations.Where(x => x.DefType == 1).ToList();
             comboCurrency.DisplayMemberPath = "DefValue";
