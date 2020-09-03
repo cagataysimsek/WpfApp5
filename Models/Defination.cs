@@ -12,8 +12,6 @@ namespace Models
         public int DefType { get; set; }
         [Required]
         public string DefValue { get; set; }
-        [ForeignKey("DefId")]
-        public virtual ICollection<Product> Products { get; set; }
  
 
     }

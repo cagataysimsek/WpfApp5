@@ -11,10 +11,8 @@ namespace Models
         [Key]
         public int Id { get; set; }
         public string RoleName { get; set; }
-        [ForeignKey("RoleId")]
-        public ICollection<User>User { get; set; }
-        [ForeignKey("RoleId")]
-        public ICollection<Permission>Permissions { get; set; }
+       
+        
 
     }
 }

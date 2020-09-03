@@ -13,6 +13,5 @@ namespace Models
         public int DealerId { get; set; }
         [Required]
         public int BussinessTypeId { get; set; }
-        public Dealer Dealer  { get; set; }
     }
 }

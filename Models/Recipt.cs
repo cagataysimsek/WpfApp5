@@ -10,7 +10,5 @@ namespace Models
         public int MaterialId { get; set; }
         [Required]
         public double Value { get; set; }
-        public Product Product { get; set; }
-        public Material Material { get; set; }
     }
 }

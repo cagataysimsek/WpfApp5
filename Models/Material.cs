@@ -11,9 +11,7 @@ namespace Models
         [Required]
         public string MaterialName { get; set; }
         public int DefId { get; set; }
-        public Defination Defination { get; set; }
-        [ForeignKey("MaterialId")]
-        public ICollection<Recipt> Recipts { get; set; }
+        
 
     }
 }
