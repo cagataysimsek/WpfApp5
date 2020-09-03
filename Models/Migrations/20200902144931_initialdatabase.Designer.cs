@@ -2,37 +2,23 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
 namespace Models.Migrations
 {
     [DbContext(typeof(StockAutomationDBContext))]
-    partial class StockAutomationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200902144931_initialdatabase")]
+    partial class initialdatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Models.Dealer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DealerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Dealers");
-                });
 
             modelBuilder.Entity("Models.Defination", b =>
                 {
@@ -60,7 +46,7 @@ namespace Models.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DefiId")
+                    b.Property<int>("DefId")
                         .HasColumnType("int");
 
                     b.Property<string>("MaterialName")
@@ -69,55 +55,23 @@ namespace Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DefiId");
-
                     b.ToTable("Materials");
                 });
 
-            modelBuilder.Entity("Models.Product", b =>
+            modelBuilder.Entity("Models.Migrations.Dealer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DefId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductName")
+                    b.Property<string>("DealerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DefId");
-
-                    b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Models.Recipt", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Value")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MaterialId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Recipt");
+                    b.ToTable("Dealers");
                 });
 
             modelBuilder.Entity("Models.Station", b =>
@@ -160,42 +114,9 @@ namespace Models.Migrations
                     b.ToTable("Suppliers");
                 });
 
-            modelBuilder.Entity("Models.Material", b =>
-                {
-                    b.HasOne("Models.Defination", "Defination")
-                        .WithMany("Materials")
-                        .HasForeignKey("DefiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.Product", b =>
-                {
-                    b.HasOne("Models.Defination", "Defination")
-                        .WithMany("Products")
-                        .HasForeignKey("DefId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.Recipt", b =>
-                {
-                    b.HasOne("Models.Material", "Material")
-                        .WithMany("Recipts")
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Product", "Product")
-                        .WithMany("Recipts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Models.Station", b =>
                 {
-                    b.HasOne("Models.Dealer", "Dealer")
+                    b.HasOne("Models.Migrations.Dealer", "Dealer")
                         .WithMany("Stations")
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)

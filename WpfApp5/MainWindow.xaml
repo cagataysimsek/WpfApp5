@@ -24,6 +24,9 @@
             <MenuItem Header="Materyal Giriş/Çıkış" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MenuItem_Click_1">
                 
             </MenuItem>
+            <MenuItem Header="Ürün Reçetesi" HorizontalAlignment="Left" VerticalAlignment="Top" Click="MenuItem_Click_2">
+
+            </MenuItem>
         </Menu>
 
 

@@ -72,5 +72,11 @@ namespace WpfApp5
             mt.ShowDialog();
            
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            Recipt recipt = new Recipt();
+            recipt.ShowDialog();
+        }
     }
 }
