@@ -264,7 +264,7 @@ namespace WpfApp5
             {
                 if (doubleUpDownFee.Value!=0 && doubleUpDownQuantity.Value!=0)
                 {
-
+                    
                 }
                 else
                 {
