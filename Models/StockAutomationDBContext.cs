@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Models.Migrations;
+
 
 namespace Models
 {
@@ -12,7 +12,7 @@ namespace Models
         public DbSet<Supplier> Suppliers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-2IT11V6\\WINCCPLUSMIG2014;Initial Catalog=StockAutomationDB;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StockAutomationDB;Integrated Security=True");
         }
     }
 }

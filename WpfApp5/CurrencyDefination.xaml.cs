@@ -33,7 +33,7 @@ namespace WpfApp5
             var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType == (int)Definition.Currency).SingleOrDefault();
             if (item == null)
             {
-                if (string.IsNullOrEmpty(comboCurrency.Text))
+                if (string.IsNullOrEmpty(comboCurrency.Text) || string.IsNullOrWhiteSpace(comboCurrency.Text))
                 {
                     MessageBox.Show("Para Birimi Boş Bırakılamaz!");
                 }
@@ -72,7 +72,7 @@ namespace WpfApp5
 
         private void buttonSil_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(comboCurrency.Text))
+            if (!string.IsNullOrEmpty(comboCurrency.Text) || !string.IsNullOrWhiteSpace(comboCurrency.Text))
             {
                 var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType == (int)Definition.Currency).FirstOrDefault();
                 if (item != null)
@@ -94,7 +94,7 @@ namespace WpfApp5
         private void buttonGuncelle_Click(object sender, RoutedEventArgs e)
         {
             var item = context.Definations.Where(x => x.DefValue == comboCurrency.Text && x.DefType == (int)Definition.Currency).FirstOrDefault();
-            if (!string.IsNullOrEmpty(comboCurrency.Text))
+            if (!string.IsNullOrEmpty(comboCurrency.Text) || !string.IsNullOrWhiteSpace(comboCurrency.Text))
             {
                 if (item != null)
                 {

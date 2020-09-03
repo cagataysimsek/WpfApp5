@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
@@ -14,6 +12,9 @@ namespace Models
         public int DefType { get; set; }
         [Required]
         public string DefValue { get; set; }
+        [ForeignKey("DefId")]
+        public virtual ICollection<Product> Products { get; set; }
+ 
 
     }
 }

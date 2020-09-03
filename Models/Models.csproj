@@ -17,9 +17,22 @@
     <Compile Remove="Migrations\20200830063000_09.29.Designer.cs" />
     <Compile Remove="Migrations\20200830063635_09.35.cs" />
     <Compile Remove="Migrations\20200830063635_09.35.Designer.cs" />
+    <Compile Remove="Migrations\20200903093338_updb.cs" />
+    <Compile Remove="Migrations\20200903093338_updb.Designer.cs" />
+    <Compile Remove="Migrations\20200903102747_again.cs" />
+    <Compile Remove="Migrations\20200903102747_again.Designer.cs" />
+    <Compile Remove="Migrations\20200903103832_1102.cs" />
+    <Compile Remove="Migrations\20200903103832_1102.Designer.cs" />
+    <Compile Remove="Migrations\20200903104001_1414.cs" />
+    <Compile Remove="Migrations\20200903104001_1414.Designer.cs" />
+    <Compile Remove="Migrations\20200903104217_1414.cs" />
+    <Compile Remove="Migrations\20200903104217_1414.Designer.cs" />
+    <Compile Remove="Migrations\20200903105655_1414.cs" />
+    <Compile Remove="Migrations\20200903105655_1414.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
